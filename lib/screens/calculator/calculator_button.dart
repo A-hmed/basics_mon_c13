@@ -23,10 +23,11 @@ class CalculatorButton extends StatelessWidget {
             onPressed: () {
               onClick(digit);
             },
-            style: ButtonStyle(),
+            style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.lightBlue)),
             child: Text(
               digit,
-              style: TextStyle(color: textColor, fontSize: 48),
+              style: TextStyle(color: textColor, fontSize: 32),
             )),
       ),
     );
