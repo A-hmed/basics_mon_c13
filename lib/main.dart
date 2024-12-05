@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basics_c13/screens/calculator/calculator.dart';
 import 'package:flutter_basics_c13/screens/home/home.dart';
 import 'package:flutter_basics_c13/screens/login/login.dart';
+import 'package:flutter_basics_c13/screens/xo/choose_player_screen.dart';
 import 'package:flutter_basics_c13/screens/xo/game_board.dart';
 
 Color titleBgColor = Color(0xff852bba);
@@ -23,9 +24,10 @@ class MyApp extends StatelessWidget {
         },
         Login.routeName: (_) => Login(),
         Calculator.routeName: (_) => Calculator(),
-        GameBoard.routeName: (_) => GameBoard()
+        GameBoard.routeName: (_) => GameBoard(),
+        ChoosePlayerScreen.routeName: (_) => ChoosePlayerScreen(),
       },
-      initialRoute: GameBoard.routeName,
+      initialRoute: ChoosePlayerScreen.routeName,
     );
   }
 }

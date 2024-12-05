@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_basics_c13/screens/xo/gradient_bg_scaffold.dart';
 import 'package:flutter_basics_c13/screens/xo/xo_button.dart';
 
 const Color lightBlue = Color(0xff00D2FF);
@@ -23,6 +24,8 @@ class _GameBoardState extends State<GameBoard> {
   int counter = 0;
   bool isWinner = false;
   late Timer timer;
+  String firstPlayer = "";
+  String secondPlayer = "";
 
   @override
   void initState() {
@@ -32,26 +35,24 @@ class _GameBoardState extends State<GameBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [lightBlue, darkLightBlue],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              buildStopWatch(),
-              buildPlayerTurnText(),
-              buildBoard(),
-              buildResetButton()
-            ],
-          ),
-        ),
-      ),
-    );
+    ModalRoute currentScreenModalRoute = ModalRoute.of(context)!;
+    firstPlayer = currentScreenModalRoute.settings.arguments as String;
+    if (firstPlayer == "x") {
+      secondPlayer = "o";
+    } else {
+      secondPlayer = "x";
+    }
+    //secondPlayer = firstPlayer == "x" ? "o": "x";
+    return GradientBgScaffold(
+        body: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        buildStopWatch(),
+        buildPlayerTurnText(),
+        buildBoard(),
+        buildResetButton()
+      ],
+    ));
   }
 
   void startTimer() {
@@ -139,7 +140,7 @@ class _GameBoardState extends State<GameBoard> {
     if (board[index].isNotEmpty) return;
     if (isWinner) return;
 
-    board[index] = counter % 2 == 0 ? "o" : "x";
+    board[index] = counter % 2 == 0 ? firstPlayer : secondPlayer;
     if (checkWinner()) {
       isWinner = true;
       timer.cancel();
@@ -151,7 +152,7 @@ class _GameBoardState extends State<GameBoard> {
   }
 
   bool checkWinner() {
-    String symbol = counter % 2 == 0 ? "o" : "x";
+    String symbol = counter % 2 == 0 ? firstPlayer : secondPlayer;
 
     ///Rows
     if (board[0] == symbol && board[1] == symbol && board[2] == symbol)
