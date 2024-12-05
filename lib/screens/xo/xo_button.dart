@@ -18,11 +18,14 @@ class XoButton extends StatelessWidget {
       onTap: () {
         onClick(index);
       },
-      child: Text(
-        symbol,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            fontSize: 50, color: symbol == "x" ? Colors.black : Colors.green),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          symbol,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 55, color: symbol == "x" ? Colors.black : Colors.green),
+        ),
       ),
     ));
   }
